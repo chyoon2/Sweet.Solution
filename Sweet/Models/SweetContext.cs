@@ -7,9 +7,7 @@ namespace Sweet.Models
   {
     public virtual DbSet<Treat> Treat { get; set; }
     public DbSet<Flavor> Flavor { get; set; }
-    
     public DbSet<FlavorTreat> FlavorTreat { get; set; }
-
     public SweetContext(DbContextOptions options) : base(options) { }
   }
 }

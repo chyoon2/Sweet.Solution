@@ -29,7 +29,7 @@ namespace Sweet
         .AddDbContext<SweetContext>(options => options
         .UseMySql(Configuration["ConnectionStrings:DefaultConnection"]));
 
-      services.AddIdentity<LibrarianUser, IdentityRole>()
+      services.AddIdentity<ApplicationUser, IdentityRole>()
         .AddEntityFrameworkStores<SweetContext>()
         .AddDefaultTokenProviders();
       
