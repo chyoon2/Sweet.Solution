@@ -38,7 +38,7 @@ namespace Sweet.Controllers
         IdentityResult result = await roleManager.CreateAsync(identityRole);
         if(result.Succeeded)
         {
-          return RedirectToAction("Index", "Home");
+          return RedirectToAction("ListOfRoles", "Administration");
         }
 
         foreach(IdentityError error in result.Errors)
@@ -48,6 +48,12 @@ namespace Sweet.Controllers
       }
 
       return View(model);
+    }
+    
+    public IActionResult ListOfRoles()
+    {
+      var roles = roleManager.Roles;
+      return View(roles);
     }
   }
 }
