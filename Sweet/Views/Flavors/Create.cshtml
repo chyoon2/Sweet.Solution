@@ -8,11 +8,11 @@
 
 @using (Html.BeginForm())
 {
-    @Html.LabelFor(model => model.FlavorName)
+    @Html.Label("Flavor Name")
     @Html.TextBoxFor(model => model.FlavorName)
 
     @Html.Label("Select Treat")
-    @Html.DropDownList("TreatId")
+    @Html.DropDownList("TreatId", "Select")
 
     <input type="submit" value="Add new Flavor" class="btn btn-default" />
 }

@@ -16,7 +16,7 @@
     @Html.EditorFor(model => model.TreatName)
 
     @Html.Label("Select Flavor")
-    @Html.DropDownList("FlavorId")
+    @Html.DropDownList("FlavorId", "Select")
     <input type="submit" value="Save" />
 }
 <p>@Html.ActionLink("Back to list", "Index")</p>
