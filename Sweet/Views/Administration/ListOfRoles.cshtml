@@ -1,13 +1,37 @@
+
+@using Sweet.ViewModels
+@using Microsoft.AspNetCore.Identity;
 @model IEnumerable<IdentityRole>
+
 
 <h1> List of Roles</h1>
 
+@using (Html.BeginForm("CreateRole", "Administration"))
+{
+    <button type = "submit" class="btn btn-default"> Make New Role</button>
+}
+
+
+
+<h1>Current Roles</h1>
 @if(Model.Any())
 {
+  foreach(var role in Model)
+  {
+    <li>Id number: @role.Id</li>
+    <li>Name: @role.Name</li>
 
+@using (Html.BeginForm("CreateRole", "Administration"))
+{
+    <button type = "submit" class="btn btn-default"> Edit Role</button>
+}  
+@using (Html.BeginForm("CreateRole", "Administration"))
+{
+    <button type = "submit" class="btn btn-default"> Delete Role</button>
+}  
+}
 }
 else
 {
-@Html.BeginForm("CreateRole", "Administration")
-    <button type = "submit" class="btn btn-default"> Make New Role</button>
+  <p>There are no current roles</p>
 }
