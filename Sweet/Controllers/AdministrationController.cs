@@ -30,19 +30,24 @@ namespace Sweet.Controllers
     {
       if(ModelState.IsValid)
       {
-        IdentityRole identityRole = new IdentityRole{ Name = model.RoleName};
+        IdentityRole identityRole = new IdentityRole
+        { 
+          Name = model.RoleName
+        };
+
         IdentityResult result = await roleManager.CreateAsync(identityRole);
         if(result.Succeeded)
         {
-          return RedirectToAction("index", "Home");
+          return RedirectToAction("Index", "Home");
         }
+
         foreach(IdentityError error in result.Errors)
         {
           ModelState.AddModelError("", error.Description);
         }
       }
-      return View();
+
+      return View(model);
     }
-    
   }
 }
