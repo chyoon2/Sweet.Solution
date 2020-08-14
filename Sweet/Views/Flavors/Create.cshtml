@@ -3,7 +3,7 @@
 }
 
 @model Sweet.Models.Flavor
-@using Sweet.Models
+
 <h4>Add a new Flavor</h4>
 
 @using (Html.BeginForm())
@@ -16,4 +16,4 @@
 
     <input type="submit" value="Add new Flavor" class="btn btn-default" />
 }
-<p>@Html.ActionLink("Show all flavor", "Index")</p>
+<p>@Html.ActionLink("Show all flavors", "Index")</p>

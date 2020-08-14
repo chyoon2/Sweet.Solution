@@ -47,7 +47,7 @@ namespace Sweet.Controllers
         return RedirectToAction("Index");
     }
 
-     [Authorize]
+    [Authorize]
     public ActionResult Create()
     {
       ViewBag.TreatId = new SelectList(_db.Treats, "TreatId", "Name");

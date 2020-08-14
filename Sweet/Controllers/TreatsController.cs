@@ -50,7 +50,7 @@ namespace Sweet.Controllers
     [Authorize]
     public ActionResult Create()
     {
-      ViewBag.FlavorId = new SelectList(_db.Flavors, "FlavorId", "Name");
+      ViewBag.FlavorId = new SelectList(_db.Flavors, "FlavorId", "FlavorName");
       return View();
     }
 
