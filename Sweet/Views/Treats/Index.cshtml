@@ -4,7 +4,7 @@
 @using Sweet.Models;
 @model IEnumerable<Sweet.Models.Treat>;
 
-<h1>Items for @User.Identity.Name</h1>
+<h1>Treats for @User.Identity.Name</h1>
 
   @if (Model.Any())
 {
@@ -17,7 +17,7 @@
 } 
 else
 {
-  <h3>No items have been added yet!</h3>
+  <h3>No treats have been added yet!</h3>
 }
 
 </ul>

@@ -2,7 +2,7 @@
   Layout = "_Layout";
 }
 @using Sweet.Models;
-@model IEnumerable<Sweet.Models.Item>;
+@model IEnumerable<Sweet.Models.Flavor>;
 
 <h1>Flavors for @User.Identity.Name</h1>
 
@@ -11,7 +11,7 @@
   <ul>
     @foreach (Flavor flavor in Model)
     {
-      <li>@Html.ActionLink($"{flavor.Description}", "Details", new { id = flavor.FlavorId })</li>
+      <li>@Html.ActionLink($"{flavor.FlavorName}", "Details", new { id = flavor.FlavorId })</li>
     }
   </ul>
 } 

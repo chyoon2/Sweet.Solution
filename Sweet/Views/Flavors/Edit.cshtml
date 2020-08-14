@@ -2,7 +2,7 @@
   Layout = "_Layout";
 }
 
-@model Sweet.Models.Item
+@model Sweet.Models.Flavor
 
 <h2>Edit</h2>
 
@@ -10,7 +10,7 @@
 
 @using (Html.BeginForm())
 {
-    @Html.HiddenFor(model => model.ItemId)
+    @Html.HiddenFor(model => model.FlavorId)
 
     @Html.LabelFor(model => model.FlavorName)
     @Html.EditorFor(model => model.FlavorName)
