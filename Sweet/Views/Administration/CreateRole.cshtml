@@ -1,4 +1,5 @@
 @model CreateRoleViewModel
+@using Sweet.ViewModels
 
 @{
   ViewBag.Title = "Create New Role";
@@ -12,21 +13,10 @@
       <div class="form-group">
         <label asp-for="RoleName"></label>
         <input asp-for="RoleName" class="form-control" />
-        <span asp-validation-for="Rol" class="text-danger"></span>  
+        <span asp-validation-for="RoleName" class="text-danger"></span>  
       </div>
-      <button type = "submit" class="btn btn-default"> Make New Role</button>
+      <button style= "width:auto" type = "submit" class="btn btn-default"> Make New Role</button>
     </form>
   </div>
 </div>
        
-@using (Html.BeginForm("Register", "Account", FormMethod.Post))
-{
-    @Html.LabelFor(user => user.Email)
-    @Html.TextBoxFor(user=> user.Email)
-
-    @Html.LabelFor(user=> user.Password)
-    @Html.PasswordFor(user=> user.Password)
-
-    @Html.LabelFor(user=> user.ConfirmPassword)
-    @Html.PasswordFor(user=> user.ConfirmPassword)
-  }

@@ -11,4 +11,5 @@ namespace Sweet.ViewModels
     [Required]
     public string RoleName {get; set;}
   }
+
 }
