@@ -1,0 +1,25 @@
+@{
+  Layout = "_Layout";
+}
+@using Sweet.Models;
+@model IEnumerable<Sweet.Models.Treat>;
+
+<h1>Items for @User.Identity.Name</h1>
+
+  @if (Model.Any())
+{
+  <ul>
+    @foreach (Treat treat in Model)
+    {
+      <li>@Html.ActionLink($"{treat.TreatName}", "Details", new { id = treat.TreatId })</li>
+    }
+  </ul>
+} 
+else
+{
+  <h3>No items have been added yet!</h3>
+}
+
+</ul>
+<p>@Html.ActionLink("Add new treat", "Create")</p>
+<p>@Html.ActionLink("Home", "Index", "Home")</p>
