@@ -12,7 +12,6 @@
 }
 
 
-
 <h1>Current Roles</h1>
 @if(Model.Any())
 {
@@ -21,14 +20,14 @@
     <li>Id number: @role.Id</li>
     <li>Name: @role.Name</li>
 
-@using (Html.BeginForm("CreateRole", "Administration"))
-{
-    <button type = "submit" class="btn btn-default"> Edit Role</button>
-}  
-@using (Html.BeginForm("CreateRole", "Administration"))
-{
-    <button type = "submit" class="btn btn-default"> Delete Role</button>
-}  
+  @using (Html.BeginForm("Edit", "Administration", new {id = role.Id}))
+  {
+      <button type = "submit" class="btn btn-default"> Edit Role</button>
+  }  
+  @using (Html.BeginForm("Delete", "Administration", new {id = role.Id}))
+  {
+      <button type = "submit" class="btn btn-default"> Delete Role</button>
+  }  
 }
 }
 else
