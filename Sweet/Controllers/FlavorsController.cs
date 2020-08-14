@@ -45,7 +45,6 @@ namespace Sweet.Controllers
         _db.Entry(flavor).State = EntityState.Modified;
         _db.SaveChanges();
         return RedirectToAction("Index");
-      
     }
 
      [Authorize]
@@ -78,7 +77,8 @@ namespace Sweet.Controllers
         .FirstOrDefault(flavor => flavor.FlavorId == id);
       return View(thisFlavor);
     }
-
+    
+    [Authorize]
     public ActionResult AddTreat(int id)
     {
     var thisFlavor = _db.Flavors.FirstOrDefault(flavors => flavors.FlavorId == id);
