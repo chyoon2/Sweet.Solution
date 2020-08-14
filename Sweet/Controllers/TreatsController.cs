@@ -11,7 +11,7 @@ using System.Security.Claims;
 
 namespace Sweet.Controllers
 {
-  [Authorize]
+  
   public class TreatsController : Controller
   {
     private readonly SweetContext _db;
@@ -22,14 +22,13 @@ namespace Sweet.Controllers
       _db = db;
     }
 
-    public async Task<ActionResult> Index()
+    public ActionResult Index()
     {
-      var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-      var currentUser = await _userManager.FindByIdAsync(userId);
-      var userTreats = _db.Treats.Where(entry => entry.User.Id == currentUser.Id).ToList();
-      return View(userTreats);
+      var thisTreat = _db.Treats.ToList();
+      return View(thisTreat);
     }
-    
+
+    [Authorize]
     public ActionResult Edit(int id)
     {
       var thisTreat = _db.Treats.FirstOrDefault(treats => treats.TreatId == id);
@@ -50,6 +49,7 @@ namespace Sweet.Controllers
       
     }
 
+    [Authorize]
     public ActionResult Create()
     {
       ViewBag.FlavorId = new SelectList(_db.Flavors, "FlavorId", "Name");
@@ -58,18 +58,18 @@ namespace Sweet.Controllers
 
     [HttpPost]
     public async Task<ActionResult> Create(Treat treat, int FlavorId)
-  {
+    {
     var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
     var currentUser = await _userManager.FindByIdAsync(userId);
     treat.User = currentUser;
     _db.Treats.Add(treat);
     if (FlavorId != 0)
     {
-        _db.FlavorTreat.Add(new FlavorTreat() { FlavorId = FlavorId, TreatId = treat.TreatId });
+      _db.FlavorTreat.Add(new FlavorTreat() { FlavorId = FlavorId, TreatId = treat.TreatId });
     }
-    _db.SaveChanges();
-    return RedirectToAction("Index");
-}
+      _db.SaveChanges();
+      return RedirectToAction("Index");
+    }
 
     public ActionResult Details(int id)
     {
@@ -80,6 +80,7 @@ namespace Sweet.Controllers
       return View(thisTreat);
     }
 
+    [Authorize]
     public ActionResult AddFlavor(int id)
     {
     var thisTreat = _db.Treats.FirstOrDefault(treats => treats.TreatId == id);
@@ -98,6 +99,7 @@ namespace Sweet.Controllers
       return RedirectToAction("Index");
     }
 
+    [Authorize]
     public ActionResult Delete(int id)
     {
       var thisTreat = _db.Treats.FirstOrDefault(treats => treats.TreatId == id);
@@ -119,14 +121,6 @@ namespace Sweet.Controllers
       _db.FlavorTreat.Remove(joinEntry);
       _db.SaveChanges();
       return RedirectToAction("Index");
-    }
-
-    [HttpPost]
-    public ActionResult MarkComplete(Treat treat)
-    {
-      _db.Entry(treat).State = EntityState.Modified;
-      _db.SaveChanges();
-      return RedirectToAction("Index", new { id = treat.TreatId});
     }
   }
 }

@@ -11,7 +11,6 @@ using System.Security.Claims;
 
 namespace Sweet.Controllers
 {
-  [Authorize]
   public class FlavorsController : Controller
   {
     private readonly SweetContext _db;
@@ -22,14 +21,13 @@ namespace Sweet.Controllers
       _db = db;
     }
 
-    public async Task<ActionResult> Index()
+    public ActionResult Index()
     {
-      var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-      var currentUser = await _userManager.FindByIdAsync(userId);
-      var userFlavors = _db.Flavors.Where(entry => entry.User.Id == currentUser.Id).ToList();
-      return View(userFlavors);
+      var thisFlavors = _db.Flavors.ToList();
+      return View(thisFlavors);
     }
-    
+
+     [Authorize]
     public ActionResult Edit(int id)
     {
       var thisFlavor = _db.Flavors.FirstOrDefault(flavors => flavors.FlavorId == id);
@@ -50,6 +48,7 @@ namespace Sweet.Controllers
       
     }
 
+     [Authorize]
     public ActionResult Create()
     {
       ViewBag.TreatId = new SelectList(_db.Treats, "TreatId", "Name");
@@ -58,7 +57,7 @@ namespace Sweet.Controllers
 
     [HttpPost]
     public async Task<ActionResult> Create(Flavor flavor, int TreatId)
-  {
+    {
     var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
     var currentUser = await _userManager.FindByIdAsync(userId);
     flavor.User = currentUser;
@@ -69,7 +68,7 @@ namespace Sweet.Controllers
     }
     _db.SaveChanges();
     return RedirectToAction("Index");
-}
+    }
 
     public ActionResult Details(int id)
     {
@@ -98,6 +97,7 @@ namespace Sweet.Controllers
       return RedirectToAction("Index");
     }
 
+    [Authorize]
     public ActionResult Delete(int id)
     {
       var thisFlavor = _db.Flavors.FirstOrDefault(flavors => flavors.FlavorId == id);
@@ -112,6 +112,7 @@ namespace Sweet.Controllers
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
+
     [HttpPost]
     public ActionResult DeleteTreat(int joinId)
     {
