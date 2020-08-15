@@ -72,34 +72,25 @@ namespace Sweet.Controllers
           }         
       }
       return View(model);
-  }
-  [HttpPost]
-public async Task<IActionResult> EditRole(EditRoleViewModel model)
-{
-    var role = await roleManager.FindByIdAsync(model.Id);
-
-    if (role == null)
-    {
-        ViewBag.ErrorMessage = $"Role with Id = {model.Id} cannot be found";
-        return View("NotFound");
     }
-    else
+
+    [HttpPost]
+    public async Task<IActionResult> Edit(EditRoleViewModel model)
     {
-        role.Name = model.RoleName;
-        var result = await roleManager.UpdateAsync(role);
+      var role = await roleManager.FindByIdAsync(model.Id);
+      role.Name = model.RoleName;
+      var result = await roleManager.UpdateAsync(role);
 
-        if (result.Succeeded)
-        {
-            return RedirectToAction("ListRoles");
-        }
+      if (result.Succeeded)
+      {
+          return RedirectToAction("ListOfRoles");
+      }
 
-        foreach (var error in result.Errors)
-        {
-            ModelState.AddModelError("", error.Description);
-        }
-
-        return View(model);
+      foreach (var error in result.Errors)
+      {
+          ModelState.AddModelError("", error.Description);
+      }
+      return View(model);
     }
   }
-}
 }
