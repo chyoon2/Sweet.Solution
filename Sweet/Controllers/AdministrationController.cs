@@ -83,7 +83,7 @@ namespace Sweet.Controllers
 
       if (result.Succeeded)
       {
-          return RedirectToAction("ListOfRoles");
+          return RedirectToAction("Index");
       }
 
       foreach (var error in result.Errors)
