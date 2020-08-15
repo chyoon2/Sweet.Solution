@@ -18,6 +18,7 @@ _This is a web application that allows for bakers like Pierre to show user which
 | The program allows user to DELETE Treat or Flavor | N/A | N/A |
 | The program displays user home page | N/A | "Hello john@gmail.com"|
 | The program allows user to Log in and Log out| N/A | N/A |
+| The program allows authorized user to add and edit UserRoles | N/A | "Hello john@gmail.com"|
 
 ## Setup/Installation Requirements
 

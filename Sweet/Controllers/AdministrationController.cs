@@ -24,13 +24,13 @@ namespace Sweet.Controllers
       this.roleManager = roleManager;
     }
 
-    public IActionResult CreateRole()
+    public IActionResult Create()
     {
       return View();
     }
 
     [HttpPost]
-    public async Task<IActionResult> CreateRole(CreateRoleViewModel model)
+    public async Task<IActionResult> Create(CreateRoleViewModel model)
     {
       if(ModelState.IsValid)
       {

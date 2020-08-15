@@ -29,9 +29,7 @@
       <h5>None current users</h5>
   }
 
-@using (Html.BeginForm("Edit", "Administration"))
+@using (Html.BeginForm("EditUsersInRole", "Administration", new{Id = @Model.Id}))
 {
- <button type="submit" class="btn btn-primary" >Remove Users</button>
+ <button type="submit" class="btn btn-primary" >Add or Remove Users</button>
 }
-
- <button type="submit" class="btn btn-primary" >Add Users</button>
