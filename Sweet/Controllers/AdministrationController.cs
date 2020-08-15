@@ -59,19 +59,47 @@ namespace Sweet.Controllers
       return View(roles);
     }
 
-    public async Task<IActionResult> Edit (string id)
+    public async Task<IActionResult> Edit (string Id)
     {
-      var result = await roleManager.FindByIdAsync(id);
-      var model = new EditRoleViewModel{ Id = Id, RoleName= RoleName, };
+      var result = await roleManager.FindByIdAsync(Id);
+      var model = new EditRoleViewModel{ Id = Id, RoleName= result.Name, };
 
-      foreach(var user in UserManager.Users)
-      {
-        if(await userManager.IsInRoleAsync(user, role.Name));
-        {
-          model.Users.Add(user.Name);
-        }
+      foreach (var user in await userManager.Users.ToListAsync())
+      {                    
+          if (await userManager.IsInRoleAsync(user, result.Name))
+          {
+              model.Users.Add(user.UserName);
+          }         
       }
       return View(model);
+  }
+  [HttpPost]
+public async Task<IActionResult> EditRole(EditRoleViewModel model)
+{
+    var role = await roleManager.FindByIdAsync(model.Id);
+
+    if (role == null)
+    {
+        ViewBag.ErrorMessage = $"Role with Id = {model.Id} cannot be found";
+        return View("NotFound");
+    }
+    else
+    {
+        role.Name = model.RoleName;
+        var result = await roleManager.UpdateAsync(role);
+
+        if (result.Succeeded)
+        {
+            return RedirectToAction("ListRoles");
+        }
+
+        foreach (var error in result.Errors)
+        {
+            ModelState.AddModelError("", error.Description);
+        }
+
+        return View(model);
+    }
   }
 }
 }
