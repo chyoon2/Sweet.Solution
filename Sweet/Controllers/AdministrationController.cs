@@ -17,7 +17,7 @@ namespace Sweet.Controllers
   {
     private readonly RoleManager<IdentityRole> roleManager;
     private readonly UserManager<ApplicationUser> userManager;
-
+    
     public AdministrationController(RoleManager<IdentityRole> roleManager, UserManager<ApplicationUser> userManager)
     {
       this.userManager = userManager;
